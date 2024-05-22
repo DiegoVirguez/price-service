@@ -1,0 +1,96 @@
+openapi: 3.0.0
+info:
+  title: Price Query API
+  version: 1.0.0
+paths:
+  /v1/prices:
+    get:
+      summary: Check the price to apply for a product in a brand on a specific date
+      parameters:
+        - name: applicationDate
+          in: query
+          description: |
+            Price application date (format: YYYY-MM-DD)
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: productId
+          in: query
+          description: Product identifier
+          required: true
+          schema:
+            type: string
+        - name: brandId
+          in: query
+          description: Brand identifier
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Price consulted correctly
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  productId:
+                    type: string
+                    example: "35455"
+                  brandId:
+                    type: string
+                    example: "1"
+                  priceList:
+                    type: number
+                    example: 10.5
+                  startDate:
+                    type: string
+                    format: date
+                    example: "2024-05-15"
+                  endDate:
+                    type: string
+                    format: date
+                    example: "2024-05-16"
+                  price:
+                    type: number
+                    example: 100.0
+        '400':
+          description: Invalid query parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorCode:
+                    type: string
+                    example: "400"
+                  error:
+                    type: string
+                    example: "Invalid query parameters"
+        '404':
+          description: Price not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorCode:
+                    type: string
+                    example: "404"
+                  errorMessage:
+                    type: string
+                    example: "Resource not found"
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorCode:
+                    type: string
+                    example: "500"
+                  errorMessage:
+                    type: string
+                    example: "Internal Server Error"
