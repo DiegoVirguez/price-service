@@ -4,7 +4,7 @@ In order to test the app price-service, please follow the next:
 
 ### Set up the environment:
 
-* Have installed Java 8 or higher.
+* Have installed Java 17 or higher.
 * Have installed maven.
 
 You should be able to test it with the following endPoint:
