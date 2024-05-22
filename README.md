@@ -31,15 +31,15 @@ Response example:
 
 To run the app:
 
-* Clone the git repository.
+* Clone the git repository (using ssh command).
 * Navigate to the project directory.
 * Run the command mvn package to compile the project and generate the target folder.
 * Run the command java -jar target/price-api-spec-1.0-SNAPSHOT.jar to launch the application.
 
 Here are the commands in order:
     
-    git clone <repository_url>
-    cd <project_name>
+    git git@github.com:DiegoVirguez/price-service.git
+    cd price-service
     mvn package
     java -jar target/price-api-spec-1.0-SNAPSHOT.jar
 You can run a Spring Boot application from your IDE as a simple Java application, however, first you will need to import your project. Import steps will vary depending on your IDE and build system.
