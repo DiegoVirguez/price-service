@@ -1,4 +1,4 @@
-package com.davirguezc.price.test.api.impl.rest.priceapiimpl;
+package com.davirguezc.price.test.api.impl;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

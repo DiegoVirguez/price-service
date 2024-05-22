@@ -1,20 +1,31 @@
 openapi: 3.0.0
 info:
   title: Price Query API
-  version: 1.0.0
+  description: 'API Spec'
+  contact:
+    email: davirguezc18@gmail.com
+  version: "1.0"
+servers:
+  - url: http://localhost:8080
+    description: Local server
+tags:
+  - name: price
 paths:
   /v1/prices:
     get:
+      operationId: getPrice
+      tags:
+        - price
       summary: Check the price to apply for a product in a brand on a specific date
       parameters:
         - name: applicationDate
           in: query
           description: |
-            Price application date (format: YYYY-MM-DD)
+            Price application date (format: YYYY-MM-DDTHH:MM:SS)
           required: true
           schema:
             type: string
-            format: date
+            format: date-time
         - name: productId
           in: query
           description: Product identifier
@@ -33,64 +44,74 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  productId:
-                    type: string
-                    example: "35455"
-                  brandId:
-                    type: string
-                    example: "1"
-                  priceList:
-                    type: number
-                    example: 10.5
-                  startDate:
-                    type: string
-                    format: date
-                    example: "2024-05-15"
-                  endDate:
-                    type: string
-                    format: date
-                    example: "2024-05-16"
-                  price:
-                    type: number
-                    example: 100.0
+                $ref: '#/components/schemas/PriceDetail'
         '400':
           description: Invalid query parameters
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errorCode:
-                    type: string
-                    example: "400"
-                  error:
-                    type: string
-                    example: "Invalid query parameters"
+                $ref: '#/components/schemas/BadRequestResponse'
         '404':
           description: Price not found
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errorCode:
-                    type: string
-                    example: "404"
-                  errorMessage:
-                    type: string
-                    example: "Resource not found"
+                $ref: '#/components/schemas/NotFoundResponse'
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errorCode:
-                    type: string
-                    example: "500"
-                  errorMessage:
-                    type: string
-                    example: "Internal Server Error"
+                $ref: '#/components/schemas/InternalServerErrorResponse'
+components:
+  schemas:
+    PriceDetail:
+      type: object
+      properties:
+        productId:
+          type: string
+          description: Product identifier
+        brandId:
+          type: string
+          description: Brand identifier
+        priceList:
+          type: integer
+          description: Rate to apply (price list)
+        startDate:
+          type: string
+          format: date-time
+          description: Start date of application
+        endDate:
+          type: string
+          format: date-time
+          description: End date of application
+        finalPrice:
+          type: number
+          description: Final price to apply
+    BadRequestResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          example: "400"
+        error:
+          type: string
+          example: "Invalid query parameters"
+    NotFoundResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          example: "404"
+        errorMessage:
+          type: string
+          example: "Resource not found"
+    InternalServerErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          example: "500"
+        errorMessage:
+          type: string
+          example: "Internal Server Error"
