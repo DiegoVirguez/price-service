@@ -48,7 +48,6 @@ Data test:
 Here are the commands in order:
     
     git git@github.com:DiegoVirguez/price-service.git
-    cd price-service
     mvn package
     java -jar price-api-impl/target/price-api-impl-1.0-SNAPSHOT.jar
 You can run a Spring Boot application from your IDE as a simple Java application, however, first you will need to import your project. Import steps will vary depending on your IDE and build system.
@@ -56,7 +55,7 @@ You can run a Spring Boot application from your IDE as a simple Java application
 #### Use docker to run the application:
 
     git git@github.com:DiegoVirguez/price-service.git
-    cd price-service
+    cd price-api-impl
     mvn spring-boot:build-image
     docker run -p 8080:8080 davirguezc/inditexprice/price-api-impl:1.0-SNAPSHOT
 
