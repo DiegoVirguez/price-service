@@ -1,0 +1,598 @@
+{
+	"info": {
+		"_postman_id": "c5b26445-362a-4aa3-8c94-07b80f9dbecd",
+		"name": "inditex-test-collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2976934"
+	},
+	"item": [
+		{
+			"name": "getPrice",
+			"item": [
+				{
+					"name": "getPriceCase1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Product ID is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.productId).to.eql(\"35455\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Brand ID is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.brandId).to.eql(\"1\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Price List is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.priceList).to.eql(4);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Start Date is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.startDate).to.eql(\"2020-06-15T16:00:00\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"End Date is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.endDate).to.eql(\"2020-12-31T23:59:59\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Final Price is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.finalPrice).to.eql(\"38.95\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"applicationDate\", \"2020-12-31T23:59:59\");\r",
+									"pm.environment.set(\"productId\", \"35455\");\r",
+									"pm.environment.set(\"brandId\", \"1\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/prices?applicationDate={{applicationDate}}&productId={{productId}}&brandId={{brandId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"prices"
+							],
+							"query": [
+								{
+									"key": "applicationDate",
+									"value": "{{applicationDate}}"
+								},
+								{
+									"key": "productId",
+									"value": "{{productId}}"
+								},
+								{
+									"key": "brandId",
+									"value": "{{brandId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPriceCase2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check productId\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.productId).to.eql(\"35455\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check brandId\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.brandId).to.eql(\"1\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check priceList\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.priceList).to.eql(2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check startDate\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.startDate).to.eql(\"2020-06-14T15:00:00\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check endDate\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.endDate).to.eql(\"2020-06-14T18:30:00\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check finalPrice\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.finalPrice).to.eql(\"25.45\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"applicationDate\", \"2020-06-14T16:00:00\");\r",
+									"pm.environment.set(\"productId\", \"35455\");\r",
+									"pm.environment.set(\"brandId\", \"1\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/prices?applicationDate={{applicationDate}}&productId={{productId}}&brandId={{brandId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"prices"
+							],
+							"query": [
+								{
+									"key": "applicationDate",
+									"value": "{{applicationDate}}"
+								},
+								{
+									"key": "productId",
+									"value": "{{productId}}"
+								},
+								{
+									"key": "brandId",
+									"value": "{{brandId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPriceCase3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check productId\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.productId).to.eql(\"35455\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check brandId\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.brandId).to.eql(\"1\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check priceList\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.priceList).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check startDate\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.startDate).to.eql(\"2020-06-14T00:00:00\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check endDate\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.endDate).to.eql(\"2020-12-31T23:59:59\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check finalPrice\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.finalPrice).to.eql(\"35.5\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"applicationDate\", \"2020-06-14T21:00:00\");\r",
+									"pm.environment.set(\"productId\", \"35455\");\r",
+									"pm.environment.set(\"brandId\", \"1\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/prices?applicationDate={{applicationDate}}&productId={{productId}}&brandId={{brandId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"prices"
+							],
+							"query": [
+								{
+									"key": "applicationDate",
+									"value": "{{applicationDate}}"
+								},
+								{
+									"key": "productId",
+									"value": "{{productId}}"
+								},
+								{
+									"key": "brandId",
+									"value": "{{brandId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPriceCase4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check productId\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.productId).to.eql(\"35455\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check brandId\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.brandId).to.eql(\"1\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check priceList\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.priceList).to.eql(3);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check startDate\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.startDate).to.eql(\"2020-06-15T00:00:00\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check endDate\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.endDate).to.eql(\"2020-06-15T11:00:00\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check finalPrice\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.finalPrice).to.eql(\"30.5\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"applicationDate\", \"2020-06-15T10:00:00\");\r",
+									"pm.environment.set(\"productId\", \"35455\");\r",
+									"pm.environment.set(\"brandId\", \"1\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/prices?applicationDate={{applicationDate}}&productId={{productId}}&brandId={{brandId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"prices"
+							],
+							"query": [
+								{
+									"key": "applicationDate",
+									"value": "{{applicationDate}}"
+								},
+								{
+									"key": "productId",
+									"value": "{{productId}}"
+								},
+								{
+									"key": "brandId",
+									"value": "{{brandId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPriceCase5",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check productId\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.productId).to.eql(\"35455\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check brandId\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.brandId).to.eql(\"1\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check priceList\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.priceList).to.eql(4);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check startDate\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.startDate).to.eql(\"2020-06-15T16:00:00\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check endDate\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.endDate).to.eql(\"2020-12-31T23:59:59\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check finalPrice\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.finalPrice).to.eql(\"38.95\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"applicationDate\", \"2020-06-15T21:00:00\");\r",
+									"pm.environment.set(\"productId\", \"35455\");\r",
+									"pm.environment.set(\"brandId\", \"1\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/prices?applicationDate={{applicationDate}}&productId={{productId}}&brandId={{brandId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"prices"
+							],
+							"query": [
+								{
+									"key": "applicationDate",
+									"value": "{{applicationDate}}"
+								},
+								{
+									"key": "productId",
+									"value": "{{productId}}"
+								},
+								{
+									"key": "brandId",
+									"value": "{{brandId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPriceNotFound",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"applicationDate\", \"2020-06-15T21:00:00\");\r",
+									"pm.environment.set(\"productId\", \"99999\");\r",
+									"pm.environment.set(\"brandId\", \"1\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/prices?applicationDate={{applicationDate}}&productId={{productId}}&brandId={{brandId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"prices"
+							],
+							"query": [
+								{
+									"key": "applicationDate",
+									"value": "{{applicationDate}}"
+								},
+								{
+									"key": "productId",
+									"value": "{{productId}}"
+								},
+								{
+									"key": "brandId",
+									"value": "{{brandId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "testInvalidQueryParameters",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"applicationDate\", \"2020-06-15T21:00:00\");\r",
+									"pm.environment.set(\"productId\", \"\");\r",
+									"pm.environment.set(\"brandId\", \"1\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/prices?applicationDate={{applicationDate}}&productId={{productId}}&brandId={{brandId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"prices"
+							],
+							"query": [
+								{
+									"key": "applicationDate",
+									"value": "{{applicationDate}}"
+								},
+								{
+									"key": "productId",
+									"value": "{{productId}}"
+								},
+								{
+									"key": "brandId",
+									"value": "{{brandId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"value": "",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
