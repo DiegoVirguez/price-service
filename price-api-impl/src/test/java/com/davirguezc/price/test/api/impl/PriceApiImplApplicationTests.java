@@ -11,11 +11,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 class PriceApiImplApplicationTests {
 
     @Autowired
-    private PriceService priceService;
+    private PriceService getPriceUserCase;
 
     @Test
     void contextLoads() {
-        assertNotNull(priceService, "The service should not be null");
+        assertNotNull(getPriceUserCase, "The service should not be null");
     }
 
 }

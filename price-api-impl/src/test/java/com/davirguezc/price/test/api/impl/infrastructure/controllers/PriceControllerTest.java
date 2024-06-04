@@ -1,9 +1,10 @@
-package com.davirguezc.price.test.api.impl.interfaces;
+package com.davirguezc.price.test.api.impl.infrastructure.controllers;
 
-import com.davirguezc.price.test.api.impl.application.PriceService;
 import com.davirguezc.price.test.api.impl.domain.Price;
 import com.davirguezc.price.test.api.impl.domain.exception.PriceBadRequestException;
 import com.davirguezc.price.test.api.impl.domain.exception.PriceNotFoundException;
+import com.davirguezc.price.test.api.impl.domain.ports.in.GetPriceUserCase;
+import com.davirguezc.price.test.api.impl.infrastructure.controllers.PriceController;
 import com.davirguezc.price.test.api.v1.model.PriceDetail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,9 +24,11 @@ class PriceControllerTest {
 
     private static final String PRODUCT_ID = "testProductId";
     private static final String BRAND_ID = "testBrandId";
+    public static final String EMPTY_STRING = "";
+
 
     @Mock
-    private PriceService priceService;
+    private GetPriceUserCase priceService;
 
     @InjectMocks
     private PriceController priceController;
@@ -69,15 +72,15 @@ class PriceControllerTest {
     @Test
     void getPrice_whenInvalidQueryParameters() {
         LocalDateTime applicationDate = LocalDateTime.now();
-        String productId = "";
-        String brandId = "";
+        String productId = EMPTY_STRING;
+        String brandId = EMPTY_STRING;
 
         assertThrows(PriceBadRequestException.class, () -> priceController.getPrice(applicationDate, productId, brandId));
     }
     @Test
     void getPrice_whenProductIdIsEmpty() {
         LocalDateTime applicationDate = LocalDateTime.now();
-        String productId = "";
+        String productId = EMPTY_STRING;
         String brandId = BRAND_ID;
 
         assertThrows(PriceBadRequestException.class, () -> priceController.getPrice(applicationDate, productId, brandId));
@@ -87,7 +90,7 @@ class PriceControllerTest {
     void getPrice_whenBrandIdIsEmpty() {
         LocalDateTime applicationDate = LocalDateTime.now();
         String productId = PRODUCT_ID;
-        String brandId = "";
+        String brandId = EMPTY_STRING;
 
         assertThrows(PriceBadRequestException.class, () -> priceController.getPrice(applicationDate, productId, brandId));
     }

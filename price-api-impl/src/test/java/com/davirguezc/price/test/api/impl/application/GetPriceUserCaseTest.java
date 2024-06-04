@@ -1,7 +1,7 @@
 package com.davirguezc.price.test.api.impl.application;
 
 import com.davirguezc.price.test.api.impl.domain.Price;
-import com.davirguezc.price.test.api.impl.infrastructure.PriceRepository;
+import com.davirguezc.price.test.api.impl.domain.ports.out.PriceRepositoryPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -9,24 +9,22 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
-class PriceServiceTest {
+class GetPriceUserCaseTest {
 
     private static final String PRODUCT_ID = "testProductId";
     private static final String BRAND_ID = "testBrandId";
 
     @Mock
-    private PriceRepository priceRepository;
+    private PriceRepositoryPort priceRepositoryPort;
 
     @InjectMocks
-    private PriceService priceService;
+    private PriceService getPriceUserCase;
 
     @BeforeEach
     void setUp() {
@@ -39,26 +37,18 @@ class PriceServiceTest {
         String productId = PRODUCT_ID;
         String brandId = BRAND_ID;
 
-        Price price1 = new Price();
-        price1.setProductId(productId);
-        price1.setBrandId(brandId);
-        price1.setPriceAttribute(100.0);
-        price1.setPriority(1);
+        Price price = new Price();
+        price.setProductId(productId);
+        price.setBrandId(brandId);
+        price.setPriceAttribute(100.0);
+        price.setPriority(1);
 
-        Price price2 = new Price();
-        price2.setProductId(productId);
-        price2.setBrandId(brandId);
-        price2.setPriceAttribute(200.0);
-        price2.setPriority(2);
+        when(priceRepositoryPort.findApplicablePrice(applicationDate, productId, brandId)).thenReturn(Optional.of(price));
 
-        List<Price> prices = Arrays.asList(price1, price2);
-
-        when(priceRepository.findPrices(applicationDate, productId, brandId)).thenReturn(prices);
-
-        Optional<Price> response = priceService.findApplicablePrice(applicationDate, productId, brandId);
+        Optional<Price> response = getPriceUserCase.findApplicablePrice(applicationDate, productId, brandId);
 
         assertTrue(response.isPresent());
-        assertEquals(price2, response.get());
+        assertEquals(price, response.get());
     }
 
     @Test
@@ -67,9 +57,9 @@ class PriceServiceTest {
         String productId = PRODUCT_ID;
         String brandId = BRAND_ID;
 
-        when(priceRepository.findPrices(applicationDate, productId, brandId)).thenReturn(Arrays.asList());
+        when(priceRepositoryPort.findApplicablePrice(applicationDate, productId, brandId)).thenReturn(Optional.empty());
 
-        Optional<Price> response = priceService.findApplicablePrice(applicationDate, productId, brandId);
+        Optional<Price> response = getPriceUserCase.findApplicablePrice(applicationDate, productId, brandId);
 
         assertTrue(response.isEmpty());
     }
