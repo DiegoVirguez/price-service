@@ -65,3 +65,4 @@ Regardin the swagger documentation, you can access to the following URL:
 
 *  You can go to this page https://editor.swagger.io/ and put the content of the file price-api-spec.yaml to see the documentation.
 * `http://localhost:8080/swagger-ui/index.html`
+* The e2e testing script for Postman is included in postman_e2e_tests directory. 
