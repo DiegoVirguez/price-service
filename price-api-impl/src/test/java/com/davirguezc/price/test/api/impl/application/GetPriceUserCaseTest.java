@@ -1,6 +1,6 @@
 package com.davirguezc.price.test.api.impl.application;
 
-import com.davirguezc.price.test.api.impl.domain.Price;
+import com.davirguezc.price.test.api.impl.domain.model.Price;
 import com.davirguezc.price.test.api.impl.domain.ports.out.PriceRepositoryPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,11 +37,7 @@ class GetPriceUserCaseTest {
         String productId = PRODUCT_ID;
         String brandId = BRAND_ID;
 
-        Price price = new Price();
-        price.setProductId(productId);
-        price.setBrandId(brandId);
-        price.setPriceAttribute(100.0);
-        price.setPriority(1);
+        Price price = new Price(1L, brandId, applicationDate, applicationDate.plusDays(1), 1, productId, 1, 100.0, "EUR");
 
         when(priceRepositoryPort.findApplicablePrice(applicationDate, productId, brandId)).thenReturn(Optional.of(price));
 

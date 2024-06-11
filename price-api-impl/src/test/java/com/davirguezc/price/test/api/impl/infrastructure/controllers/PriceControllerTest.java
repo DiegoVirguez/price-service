@@ -1,16 +1,16 @@
 package com.davirguezc.price.test.api.impl.infrastructure.controllers;
 
-import com.davirguezc.price.test.api.impl.domain.Price;
 import com.davirguezc.price.test.api.impl.domain.exception.PriceBadRequestException;
 import com.davirguezc.price.test.api.impl.domain.exception.PriceNotFoundException;
+import com.davirguezc.price.test.api.impl.domain.model.Price;
 import com.davirguezc.price.test.api.impl.domain.ports.in.GetPriceUserCase;
-import com.davirguezc.price.test.api.impl.infrastructure.controllers.PriceController;
 import com.davirguezc.price.test.api.v1.model.PriceDetail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDateTime;
@@ -44,16 +44,13 @@ class PriceControllerTest {
         String productId = PRODUCT_ID;
         String brandId = BRAND_ID;
 
-        Price price = new Price();
-        price.setProductId(productId);
-        price.setBrandId(brandId);
-        price.setPriceAttribute(100.0);
+        Price price = new Price(1L, brandId, applicationDate, applicationDate.plusDays(1), 1, productId, 1, 100.0, "EUR");
 
         when(priceService.findApplicablePrice(applicationDate, productId, brandId)).thenReturn(Optional.of(price));
 
         ResponseEntity<PriceDetail> response = priceController.getPrice(applicationDate, productId, brandId);
 
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode().value());
         assertEquals(productId, response.getBody().getProductId());
         assertEquals(brandId, response.getBody().getBrandId());
     }

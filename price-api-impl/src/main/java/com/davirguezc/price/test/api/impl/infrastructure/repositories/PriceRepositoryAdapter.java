@@ -1,7 +1,8 @@
 package com.davirguezc.price.test.api.impl.infrastructure.repositories;
 
-import com.davirguezc.price.test.api.impl.domain.Price;
+import com.davirguezc.price.test.api.impl.domain.model.Price;
 import com.davirguezc.price.test.api.impl.domain.ports.out.PriceRepositoryPort;
+
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -18,6 +19,7 @@ public class PriceRepositoryAdapter implements PriceRepositoryPort {
 
     @Override
     public Optional<Price> findApplicablePrice(LocalDateTime date, String productId, String brandId) {
-        return priceRepository.findPrices(date, productId, brandId);
+        return priceRepository.findPrices(date, productId, brandId)
+                .map(PriceMapper::toDomainPrice);
     }
 }

@@ -1,6 +1,7 @@
 package com.davirguezc.price.test.api.impl.application;
 
-import com.davirguezc.price.test.api.impl.domain.Price;
+import com.davirguezc.price.test.api.impl.infrastructure.controllers.PriceMapper;
+import com.davirguezc.price.test.api.impl.domain.model.Price;
 import com.davirguezc.price.test.api.v1.model.PriceDetail;
 import org.junit.jupiter.api.Test;
 
@@ -14,21 +15,16 @@ class PriceMapperTest {
     @Test
     void testMapToPriceDetail() {
 
-        Price price = new Price();
-        price.setProductId("testProductId");
-        price.setBrandId("testBrandId");
-        price.setPriceList(1);
-        price.setStartDate(LocalDateTime.now());
-        price.setEndDate(LocalDateTime.now().plusDays(1));
-        price.setPriceAttribute(100.0);
+        LocalDateTime now = LocalDateTime.now();
+        Price price = new Price(1L, "testBrandId", now, now.plusDays(1), 1, "testProductId", 1, 100.0, "EUR");
 
         PriceDetail priceDetail = PriceMapper.mapToPriceDetail(price);
 
-        assertEquals(price.getProductId(), priceDetail.getProductId());
-        assertEquals(price.getBrandId(), priceDetail.getBrandId());
-        assertEquals(price.getPriceList(), priceDetail.getPriceList());
-        assertEquals(price.getStartDate(), priceDetail.getStartDate());
-        assertEquals(price.getEndDate(), priceDetail.getEndDate());
-        assertEquals(BigDecimal.valueOf(price.getPriceAttribute()), priceDetail.getFinalPrice());
+        assertEquals(price.productId(), priceDetail.getProductId());
+        assertEquals(price.brandId(), priceDetail.getBrandId());
+        assertEquals(price.priceList(), priceDetail.getPriceList());
+        assertEquals(price.startDate(), priceDetail.getStartDate());
+        assertEquals(price.endDate(), priceDetail.getEndDate());
+        assertEquals(BigDecimal.valueOf(price.priceAttribute()), priceDetail.getFinalPrice());
     }
 }

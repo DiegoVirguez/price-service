@@ -1,4 +1,4 @@
-package com.davirguezc.price.test.api.impl.domain;
+package com.davirguezc.price.test.api.impl.infrastructure.entities;
 
 import jakarta.persistence.*;
 

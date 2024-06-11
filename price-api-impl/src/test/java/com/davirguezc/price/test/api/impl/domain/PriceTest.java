@@ -1,5 +1,6 @@
 package com.davirguezc.price.test.api.impl.domain;
 
+import com.davirguezc.price.test.api.impl.domain.model.Price;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -22,25 +23,16 @@ class PriceTest {
     @Test
     void testGettersAndSetters() {
 
-        Price price = new Price();
-        price.setId(ID);
-        price.setProductId(PRODUCT_ID);
-        price.setBrandId(BRAND_ID);
-        price.setPriceList(PRICE_LIST);
-        price.setStartDate(startDate);
-        price.setEndDate(endDate);
-        price.setPriceAttribute(PRICE);
-        price.setPriority(PRIORITY);
-        price.setCurr(CURRENCY);
+        Price price = new Price(ID, BRAND_ID, startDate, endDate, PRICE_LIST, PRODUCT_ID, PRIORITY, PRICE, CURRENCY);
 
-        assertEquals(ID, price.getId());
-        assertEquals(PRODUCT_ID, price.getProductId());
-        assertEquals(BRAND_ID, price.getBrandId());
-        assertEquals(startDate, price.getStartDate());
-        assertEquals(endDate, price.getEndDate());
-        assertEquals(PRICE_LIST, price.getPriceList());
-        assertEquals(PRICE, price.getPriceAttribute());
-        assertEquals(PRIORITY, price.getPriority());
-        assertEquals(CURRENCY, price.getCurr());
+        assertEquals(ID, price.id());
+        assertEquals(PRODUCT_ID, price.productId());
+        assertEquals(BRAND_ID, price.brandId());
+        assertEquals(startDate, price.startDate());
+        assertEquals(endDate, price.endDate());
+        assertEquals(PRICE_LIST, price.priceList());
+        assertEquals(PRICE, price.priceAttribute());
+        assertEquals(PRIORITY, price.priority());
+        assertEquals(CURRENCY, price.curr());
     }
 }

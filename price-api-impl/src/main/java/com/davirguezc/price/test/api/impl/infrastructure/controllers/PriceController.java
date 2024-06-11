@@ -1,9 +1,8 @@
 package com.davirguezc.price.test.api.impl.infrastructure.controllers;
 
-import com.davirguezc.price.test.api.impl.application.PriceMapper;
-import com.davirguezc.price.test.api.impl.domain.Price;
 import com.davirguezc.price.test.api.impl.domain.exception.PriceBadRequestException;
 import com.davirguezc.price.test.api.impl.domain.exception.PriceNotFoundException;
+import com.davirguezc.price.test.api.impl.domain.model.Price;
 import com.davirguezc.price.test.api.impl.domain.ports.in.GetPriceUserCase;
 import com.davirguezc.price.test.api.v1.model.PriceDetail;
 import com.davirguezc.price.test.api.v1.rest.PriceApi;

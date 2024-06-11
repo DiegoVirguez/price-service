@@ -1,6 +1,6 @@
 package com.davirguezc.price.test.api.impl.application;
 
-import com.davirguezc.price.test.api.impl.domain.Price;
+import com.davirguezc.price.test.api.impl.domain.model.Price;
 import com.davirguezc.price.test.api.impl.domain.ports.in.GetPriceUserCase;
 import com.davirguezc.price.test.api.impl.domain.ports.out.PriceRepositoryPort;
 import org.springframework.stereotype.Service;
